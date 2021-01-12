@@ -1,0 +1,3 @@
+[submodule "MouseReplayer"]
+	path = MouseReplayer
+	url = https://github.com/i-saint/MouseReplayer
