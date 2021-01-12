@@ -2,12 +2,6 @@
 #include "resource.h"
 #include "MouseReplayer.h"
 
-#pragma comment(lib,"user32.lib")
-
-#define mrTPlay L"▶"
-#define mrTRec  L"⚫"
-#define mrTStop L"❚❚"
-#define mrTExit L"✖"
 
 
 class OshiroAssistApp
@@ -20,7 +14,6 @@ public:
     bool exit();
 
     // internal
-    void repaint();
     bool onInput(mr::OpRecord& rec);
 
 public:
@@ -86,9 +79,13 @@ static INT_PTR CALLBACK mrDialogCB(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lP
     {
         // .rc file can not handle unicode. non-ascii characters must be set from program.
         // https://social.msdn.microsoft.com/Forums/ja-JP/fa09ec19-0253-478b-849f-9ae2980a3251
-        CtrlSetText(IDC_BUTTON_PLAY, mrTPlay);
-        CtrlSetText(IDC_BUTTON_RECORDING, mrTRec);
-        CtrlSetText(IDC_BUTTON_EXIT, mrTExit);
+        ::SetWindowTextW(hDlg, L"御城アシスト");
+        CtrlSetText(IDC_DESCRIPTION,
+            L"Space: 停止/再開\n"
+            L"X: 倍速\n"
+            L"U: 巨大化 (城娘選択時)\n"
+            L"R: 撤退 (城娘選択時)\n"
+        );
         ::ShowWindow(hDlg, SW_SHOW);
         ret = TRUE;
         break;
@@ -126,27 +123,6 @@ static INT_PTR CALLBACK mrDialogCB(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lP
         break;
     }
 
-    // handle buttons
-    case WM_COMMAND:
-    {
-        auto& app = GetApp();
-
-        int code = HIWORD(wParam);
-        int cid = LOWORD(wParam);
-        switch (cid) {
-        case IDC_BUTTON_EXIT:
-        {
-            app.exit();
-            ret = TRUE;
-            break;
-        }
-
-        default:
-            break;
-        }
-        break;
-    }
-
     default:
         break;
     }
@@ -174,6 +150,7 @@ void OshiroAssistApp::start()
     receiver->addHandler([this](mr::OpRecord& rec) { return onInput(rec); });
 
     m_hwnd = ::CreateDialogParam(::GetModuleHandle(nullptr), MAKEINTRESOURCE(IDD_MAINWINDOW), nullptr, mrDialogCB, (LPARAM)this);
+    //m_hwnd = ::CreateDialogParam(::GetModuleHandle(nullptr), MAKEINTRESOURCE(IDD_DIALOG1), nullptr, mrDialogCB, (LPARAM)this);
 
     MSG msg;
     for (;;) {
@@ -198,7 +175,6 @@ OshiroAssistApp::OshiroAssistApp()
 
 OshiroAssistApp::~OshiroAssistApp()
 {
-    finish();
 }
 
 void OshiroAssistApp::finish()
@@ -215,12 +191,6 @@ bool OshiroAssistApp::exit()
     else {
         return false;
     }
-}
-
-void OshiroAssistApp::repaint()
-{
-    ::InvalidateRect(m_hwnd, nullptr, 1);
-    ::UpdateWindow(m_hwnd);
 }
 
 bool OshiroAssistApp::onInput(mr::OpRecord& rec)
@@ -256,11 +226,6 @@ bool OshiroAssistApp::onInput(mr::OpRecord& rec)
             s_shift = false;
     }
 
-    // ignore function keys
-    if (rec.data.key.code == VK_ESCAPE ||
-        (rec.data.key.code >= VK_F1 && rec.data.key.code <= VK_F24)) {
-        return false;
-    }
     return true;
 }
 

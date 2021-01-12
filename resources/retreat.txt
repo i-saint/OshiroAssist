@@ -1,0 +1,7 @@
+0: SaveMousePos 0
+0: MouseMoveMatch "resources/retreat.png" "resources/yes.png"
+0: MouseDown 1
+0: SaveMousePos 1
+60: LoadMousePos 1
+60: MouseUp 1
+60: LoadMousePos 0

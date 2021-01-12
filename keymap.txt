@@ -1,0 +1,5 @@
+u: resources/upgrade.txt
+x: resources/speed.txt
+r: resources/retreat.txt
+space: resources/pause.txt
+t: resources/test.txt
