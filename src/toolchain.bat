@@ -1,4 +1,4 @@
-for /f "usebackq tokens=*" %%i in (`"%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe" /version [15.0^,17^) /property installationPath`) do (
+for /f "usebackq tokens=*" %%i in (`"%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe" /version [16.0^,^) /property installationPath`) do (
   set VSDIR=%%i
   echo %%i
 )

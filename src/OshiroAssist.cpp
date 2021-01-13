@@ -229,11 +229,22 @@ bool OshiroAssistApp::onInput(mr::OpRecord& rec)
     return true;
 }
 
+#include <delayimp.h>
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-    auto bin_path = mr::GetCurrentModuleDirectory() + "\\bin";
-    ::SetDllDirectoryA(bin_path.c_str());
+    {
+        auto bin_path = mr::GetCurrentModuleDirectory() + "\\bin";
+        ::SetDllDirectoryA(bin_path.c_str());
+        bool ok =
+            __HrLoadAllImportsForDll("opencv_core451.dll") == S_OK &&
+            __HrLoadAllImportsForDll("opencv_imgcodecs451.dll") == S_OK &&
+            __HrLoadAllImportsForDll("opencv_imgproc451.dll") == S_OK &&
+            __HrLoadAllImportsForDll("opencv_videoio451.dll") == S_OK;
+        if (!ok)
+            return 1;
+    }
 
     OshiroAssistApp::instance().start();
+    return 0;
 }
