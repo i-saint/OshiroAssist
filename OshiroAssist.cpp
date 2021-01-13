@@ -230,24 +230,9 @@ bool OshiroAssistApp::onInput(mr::OpRecord& rec)
 }
 
 
-std::string GetCurrentModuleDirectory()
-{
-    HMODULE mod = 0;
-    char buf[1024]{};
-    ::GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS, (LPCSTR)&GetCurrentModuleDirectory, &mod);
-    ::GetModuleFileNameA(mod, buf, _countof(buf));
-
-    int sep = 0;
-    for (int i = 0; buf[i] != '\0'; ++i) {
-        if (buf[i] == '\\')
-            sep = i;
-    }
-    return std::string(buf, sep);
-}
-
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-    auto bin_path = GetCurrentModuleDirectory() + "\\bin";
+    auto bin_path = mr::GetCurrentModuleDirectory() + "\\bin";
     ::SetDllDirectoryA(bin_path.c_str());
 
     OshiroAssistApp::instance().start();
