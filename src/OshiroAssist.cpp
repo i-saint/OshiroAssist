@@ -239,8 +239,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         bool ok =
             __HrLoadAllImportsForDll("opencv_core451.dll") == S_OK &&
             __HrLoadAllImportsForDll("opencv_imgcodecs451.dll") == S_OK &&
-            __HrLoadAllImportsForDll("opencv_imgproc451.dll") == S_OK &&
-            __HrLoadAllImportsForDll("opencv_videoio451.dll") == S_OK;
+            __HrLoadAllImportsForDll("opencv_imgproc451.dll") == S_OK;
         if (!ok)
             return 1;
     }
