@@ -1,6 +1,6 @@
 setlocal
 cd /d "%~dp0"
-call toolchain.
+call toolchain.bat
 msbuild OshiroAssist.vcxproj /t:Build /p:Configuration=Release /p:Platform=x64 /m /nologo
 set DIST_DIR="_dist\OshiroAssist"
 mkdir "%DIST_DIR%"
