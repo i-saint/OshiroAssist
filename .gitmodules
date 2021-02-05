@@ -1,3 +1,3 @@
-[submodule "MouseReplayer"]
-	path = src/MouseReplayer
-	url = https://github.com/i-saint/MouseReplayer
+[submodule "src/Marionette"]
+	path = src/Marionette
+	url = https://github.com/i-saint/Marionette
