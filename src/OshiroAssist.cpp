@@ -1,6 +1,6 @@
 ﻿#include "pch.h"
 #include "resource.h"
-#include "MouseReplayer.h"
+#include "Marionette.h"
 
 
 
@@ -138,12 +138,12 @@ OshiroAssistApp& OshiroAssistApp::instance()
 void OshiroAssistApp::start()
 {
     mr::LoadKeymap("keymap.txt", [this](mr::Key k, std::string path) {
-        auto player = mr::CreatePlayerShared();
+        auto player = mr::CreatePlayer();
         if (player->load(path.c_str())) {
             player->setMatchTarget(mr::MatchTarget::ForegroundWindow);
             m_keymap[k] = player;
         }
-        DbgPrint("%d %s\n", k.code, path.c_str());
+        mrDbgPrint("%d %s\n", k.code, path.c_str());
         });
 
     auto receiver = mr::GetReceiver();

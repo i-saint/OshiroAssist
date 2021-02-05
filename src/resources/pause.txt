@@ -1,3 +1,4 @@
+MatchParams CareDisplayScale=1
 0: SaveMousePos 0
 0: MouseMoveMatch "resources/pause.png" "resources/resume.png"
 0: MouseDown 1

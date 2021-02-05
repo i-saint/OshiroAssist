@@ -24,7 +24,7 @@
     <ResourceCompile Include="OshiroAssist.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="MouseReplayer\src\libMouseReplayer.vcxproj">
+    <ProjectReference Include="Marionette\src\libMarionette.vcxproj">
       <Project>{63cbdc2a-183a-495a-9242-8f34277c7695}</Project>
     </ProjectReference>
   </ItemGroup>
@@ -50,8 +50,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <IncludePath>$(ProjectDir);$(ProjectDir)MouseReplayer\src;$(ProjectDir)MouseReplayer\src\Externals\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)MouseReplayer\src\Externals\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <IncludePath>$(ProjectDir);$(ProjectDir)Marionette\src;$(ProjectDir)Marionette\src\Externals\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)Marionette\src\Externals\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
     <OutDir>$(SolutionDir)_out\$(Platform)_$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)_tmp\$(Platform)_$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
@@ -60,16 +60,16 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <DelayLoadDLLs>opencv_core451.dll;opencv_imgcodecs451.dll;opencv_imgproc451.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
     </Link>
     <Manifest>
       <EnableDpiAwareness>PerMonitorHighDPIAware</EnableDpiAwareness>
     </Manifest>
     <PostBuildEvent>
-      <Command>if not exist "$(OutDir)bin" mklink /d "$(OutDir)bin" "$(ProjectDir)MouseReplayer\src\Externals\lib"</Command>
+      <Command>if not exist "$(OutDir)bin" mklink /d "$(OutDir)bin" "$(ProjectDir)Marionette\src\Externals\lib"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
