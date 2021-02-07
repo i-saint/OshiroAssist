@@ -1,6 +1,6 @@
-MatchParams CareDisplayScale=1
+MatchParams CareDisplayScale:true Scale:1.0 ColorRange:{0.8,1.0}
 0: SaveMousePos 0
-0: MouseMoveMatch "resources/speed.png"
+0: MouseMoveMatch Pattern:"Binary" Threshold:0.2 Template:"resources/speed.png"
 0: MouseDown 1
 0: SaveMousePos 1
 60: LoadMousePos 1

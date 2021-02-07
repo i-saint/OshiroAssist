@@ -224,6 +224,14 @@ bool OshiroAssistApp::onInput(mr::OpRecord& rec)
             s_alt = false;
         if (rec.data.key.code == VK_SHIFT)
             s_shift = false;
+
+#ifdef mrDebug
+        if (rec.data.key.code == VK_F9) {
+            static bool s_dbg_flag = false;
+            s_dbg_flag = !s_dbg_flag;
+            mr::DbgSetScreenMatcherWriteout(s_dbg_flag);
+        }
+#endif
     }
 
     return true;
@@ -234,6 +242,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     auto bin_path = mr::GetCurrentModuleDirectory() + "\\bin";
     ::SetDllDirectoryA(bin_path.c_str());
 
+    mr::InitializeScope mri;
     OshiroAssistApp::instance().start();
     return 0;
 }
