@@ -1,5 +1,6 @@
 #pragma once
 
+#define NOMINMAX
 #include <windows.h>
 #include <windowsx.h>
 #include <shellscalingapi.h>
@@ -18,11 +19,3 @@
 #include <future>
 #include <tuple>
 #include <regex>
-
-#define mrWithOpenCV
-
-#ifdef mrWithOpenCV
-#include <opencv2/opencv.hpp>
-#include <opencv2/imgcodecs.hpp>
-#include <opencv2/highgui.hpp>
-#endif // mrWithOpenCV
